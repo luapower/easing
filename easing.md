@@ -1,6 +1,7 @@
 ---
-project: easing
-tagline: easing functions in Lua
+project:    easing
+tagline:    easing functions in Lua
+category:   Animation
 ---
 
 v1.0 | Lua 5.1, Lua 5.2, LuaJIT 2
