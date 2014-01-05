@@ -4,8 +4,6 @@ tagline:    easing functions in Lua
 category:   Animation
 ---
 
-v1.0 | Lua 5.1, Lua 5.2, LuaJIT 2
-
 ## `local easing = require'easing'`
 
 Robert Penner's [easing functions].
