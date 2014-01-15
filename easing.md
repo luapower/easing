@@ -1,7 +1,6 @@
 ---
 project:    easing
 tagline:    easing functions in Lua
-category:   Animation
 ---
 
 ## `local easing = require'easing'`
