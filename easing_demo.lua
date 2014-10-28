@@ -8,7 +8,6 @@ local progress
 local duration = 2
 local start_time
 local selected_func = 'linear'
-player.continuous_rendering = true
 
 function player:on_render(cr)
 
