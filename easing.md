@@ -7,13 +7,13 @@ tagline: easing functions
 
 Robert Penner's [easing functions].
 
-## `easing[formula_name](t, b, c, d) -> value in b..c`
+## `easing.<formula>(t, b, c, d) -> value in b..c`
 
 The formulas map input `d` to output `r`, where `d` is in `0 .. t` and `r` is in `b + 0 .. c`.
 
 ## Usage for animation
 
-	easing[formula_name](t1 - t0, d0, d1, T) -> d
+	easing.<formula>(t1 - t0, d0, d1, T) -> d
 
 
   * t1 is the animation's current time
