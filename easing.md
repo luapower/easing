@@ -7,7 +7,9 @@ tagline: easing functions
 
 Robert Penner's [easing functions].
 
-## `easing.<formula>(t, b, c, d) -> value in b..c`
+## API
+
+### `easing.<formula>(t, b, c, d) -> value in b..c`
 
 The formulas map input `d` to output `r`, where `d` is in `0 .. t` and `r` is in `b + 0 .. c`.
 
