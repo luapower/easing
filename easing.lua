@@ -6,24 +6,59 @@ if not ... then require'easing_demo'; return end
 
 local easing = {}
 
+local function in_out(f, p, ...)
+	if p < .5 then
+		return .5 * f(p * 2, ...)
+	else
+		p = 1 - p
+		return .5 * (1 - f(p * 2, ...)) + .5
+	end
+end
+
+local function out_in(f, p, ...)
+	if p < .5 then
+		return .5 * (1 - f(1 - p * 2, ...))
+	else
+		p = 1 - p
+		return .5 * (1 - (1 - f(1 - p * 2, ...))) + .5
+	end
+end
+
 --turn an `in` function into an `out` function or viceversa
 function easing.reverse(f)
-	return function(p, a1, a2)
-		return 1 - f(1 - p, a1, a2)
+	return function(p, ...)
+		return 1 - f(1 - p, ...)
 	end
 end
 
 --turn an `in` function into `in_out` or an `out` function into `out_in`
 function easing.in_out(f)
-	return function(p, a1, a2)
-		p = p * 2
-		if p < 1 then
-			return .5 * f(p, a1, a2)
-		else
-			p = 2 - p
-			return .5 * (1 - f(p, a1, a2)) + .5
-		end
+	return function(p, ...)
+		return in_out(f, p, ...)
 	end
+end
+
+--turn an `in` function into `out_in` or an `out` into an `in_out`.
+function easing.out_in(f)
+	return function(p, ...)
+		return out_in(f, p, ...)
+	end
+end
+
+--ease any interpolation function
+function easing.ease(f, t, b, c, d, dir, ...)
+	f = easing[f] or f
+	local p = t / d
+	if dir == 'out' then
+		p = 1 - f(1 - p, ...)
+	elseif dir == 'inout' then
+		p = in_out(f, p, ...)
+	elseif dir == 'outin' then
+		p = out_in(f, p, ...)
+	else
+		p = f(p, ...)
+	end
+	return c * p + b
 end
 
 --expression-based easing functions
@@ -61,7 +96,6 @@ e.expo    = '2^(10 * (p - 1))'
 e.sine    = '-math.cos(p * (math.pi * .5)) + 1'
 e.circ    = '-(math.sqrt(1 - p^2) - 1)'
 e.back    = 'p^2 * (2.7 * p - 1.7)'
-e.elastic = '-(2^(10 * (p - 1)) * math.sin((p - 1.075) * (math.pi * 2) / .3))'
 
 -- a: amplitude, p: period
 function easing.elastic(t, a, p)
