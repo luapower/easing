@@ -46,19 +46,18 @@ function easing.out_in(f)
 end
 
 --ease any interpolation function
-function easing.ease(f, t, b, c, d, dir, ...)
+function easing.ease(f, dir, t, d, ...)
 	f = easing[f] or f
 	local p = t / d
 	if dir == 'out' then
-		p = 1 - f(1 - p, ...)
+		return 1 - f(1 - p, ...)
 	elseif dir == 'inout' then
-		p = in_out(f, p, ...)
+		return in_out(f, p, ...)
 	elseif dir == 'outin' then
-		p = out_in(f, p, ...)
+		return out_in(f, p, ...)
 	else
-		p = f(p, ...)
+		return f(p, ...)
 	end
-	return c * p + b
 end
 
 --expression-based easing functions
@@ -88,14 +87,14 @@ setmetatable(easing, easing)
 function easing.linear(p) return p end
 
 local e = easing.expr
-e.quad    = 'p^2'
-e.cubic   = 'p^3'
-e.quart   = 'p^4'
-e.quint   = 'p^5'
-e.expo    = '2^(10 * (p - 1))'
-e.sine    = '-math.cos(p * (math.pi * .5)) + 1'
-e.circ    = '-(math.sqrt(1 - p^2) - 1)'
-e.back    = 'p^2 * (2.7 * p - 1.7)'
+e.quad  = 'p^2'
+e.cubic = 'p^3'
+e.quart = 'p^4'
+e.quint = 'p^5'
+e.expo  = '2^(10 * (p - 1))'
+e.sine  = '-math.cos(p * (math.pi * .5)) + 1'
+e.circ  = '-(math.sqrt(1 - p^2) - 1)'
+e.back  = 'p^2 * (2.7 * p - 1.7)'
 
 -- a: amplitude, p: period
 function easing.elastic(t, a, p)

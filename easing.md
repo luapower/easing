@@ -8,16 +8,14 @@ Robert Penner's easing functions.
 
 ## Animation API
 
-### `easing.ease(name|func, t1 - t0, d0, d1, T, dir, ...) -> d`
+### `easing.ease(name|func, dir, t1 - t0, T, ...) -> d`
 
   * `name|func` is (the name of) an ease function (see below)
+  * `dir` can be 'in' (default), 'out', 'inout' or 'outin'
   * `t1` is the animation's current time
   * `t0` is the animation's start time
-  * `d0` is the start value
-  * `d1` is the end value
   * `T` is the total animation duration
-  * `d` is the current value in `d0..d1` corresponding to the current time
-  * `dir` can be 'in' (default), 'out', 'inout' or 'outin'
+  * `d` is the value in `0..1` corresponding to the current time
 
 ## Easing functions
 
